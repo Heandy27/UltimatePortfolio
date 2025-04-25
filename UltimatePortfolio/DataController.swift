@@ -3,6 +3,7 @@ import CoreData
 class DataController: ObservableObject {
     //  Esta propiedad se encarga de cargar y gestionar datos locales mediante Core Data, así como de sincronizarlos con iCloud para que todos los dispositivos del usuario compartan los mismos datos para nuestra aplicación.
     let container: NSPersistentCloudKitContainer
+    @Published var selectedFilter: Filter? = Filter.all
     
     
     /*Esta es una instancia estática que se usa para previsualización en SwiftUI.
