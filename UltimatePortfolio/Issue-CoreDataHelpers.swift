@@ -1,6 +1,7 @@
 import Foundation
 
 extension Issue {
+    // Unwrap properties
     var issueTitle: String {
         get { title ?? "" }
     }

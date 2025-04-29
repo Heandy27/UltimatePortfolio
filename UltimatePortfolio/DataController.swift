@@ -24,6 +24,13 @@ class DataController: ObservableObject {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }
         
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        
+        container.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        
+        NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange, object: container.persistentStoreCoordinator, queue: .main, using: remoteStoreChanged)
+        
         // Aquí se cargan los datos desde el disco o se crea la base de datos si no existe.
         //Si hay un error, se detiene la ejecución con fatalError.
         container.loadPersistentStores { description, error in
@@ -31,6 +38,10 @@ class DataController: ObservableObject {
                 fatalError("Fatal error loading store: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func remoteStoreChanged(_ notification: Notification) {
+        objectWillChange.send()
     }
     
     func createSampleData() {

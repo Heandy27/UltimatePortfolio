@@ -16,6 +16,7 @@
 		BF5DCE042DBBE30F00143E75 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5DCDF82DBBE30F00143E75 /* SidebarView.swift */; };
 		BF5DCE052DBBE30F00143E75 /* UltimatePortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5DCDFA2DBBE30F00143E75 /* UltimatePortfolioApp.swift */; };
 		BF5DCE072DBBEA1200143E75 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5DCE062DBBEA1200143E75 /* Filter.swift */; };
+		BFD21F172DC152DE00D0F91D /* IssueRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD21F162DC152DE00D0F91D /* IssueRow.swift */; };
 		BFD3A44A2DC0360D0099FB99 /* Issue-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3A4492DC0360D0099FB99 /* Issue-CoreDataHelpers.swift */; };
 		BFD3A44C2DC037BE0099FB99 /* Tag-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD3A44B2DC037BE0099FB99 /* Tag-CoreDataHelpers.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		BF5DCDFA2DBBE30F00143E75 /* UltimatePortfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltimatePortfolioApp.swift; sourceTree = "<group>"; };
 		BF5DCDFC2DBBE30F00143E75 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		BF5DCE062DBBEA1200143E75 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		BFD21F162DC152DE00D0F91D /* IssueRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRow.swift; sourceTree = "<group>"; };
 		BFD3A4492DC0360D0099FB99 /* Issue-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Issue-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		BFD3A44B2DC037BE0099FB99 /* Tag-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		BFF140012DBAE27000039BB3 /* UltimatePortfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimatePortfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,7 @@
 				BFD3A44B2DC037BE0099FB99 /* Tag-CoreDataHelpers.swift */,
 				BF5DCDF52DBBE30F00143E75 /* DetailView.swift */,
 				BF5DCDF32DBBE30F00143E75 /* ContentView.swift */,
+				BFD21F162DC152DE00D0F91D /* IssueRow.swift */,
 				BF5DCDF82DBBE30F00143E75 /* SidebarView.swift */,
 				BF5DCDF42DBBE30F00143E75 /* DataController.swift */,
 				BF5DCDF92DBBE30F00143E75 /* UltimatePortfolio.entitlements */,
@@ -173,6 +176,7 @@
 				BF5DCE022DBBE30F00143E75 /* DetailView.swift in Sources */,
 				BF5DCE032DBBE30F00143E75 /* Main.xcdatamodeld in Sources */,
 				BF5DCE042DBBE30F00143E75 /* SidebarView.swift in Sources */,
+				BFD21F172DC152DE00D0F91D /* IssueRow.swift in Sources */,
 				BF5DCE052DBBE30F00143E75 /* UltimatePortfolioApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
