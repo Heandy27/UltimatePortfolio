@@ -4,6 +4,7 @@ class DataController: ObservableObject {
     //  Esta propiedad se encarga de cargar y gestionar datos locales mediante Core Data, así como de sincronizarlos con iCloud para que todos los dispositivos del usuario compartan los mismos datos para nuestra aplicación.
     let container: NSPersistentCloudKitContainer
     @Published var selectedFilter: Filter? = Filter.all
+    @Published var selectedIssue: Issue?
     
     
     /*Esta es una instancia estática que se usa para previsualización en SwiftUI.
@@ -23,12 +24,22 @@ class DataController: ObservableObject {
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(filePath: "/dev/null")
         }
-        
+        // Esta línea indica que el viewContext (el contexto principal que usas para mostrar y editar datos en la UI) fusionará automáticamente los cambios que vengan de otros contextos, como un contexto en segundo plano.
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        /* Define cómo resolver conflictos si dos contextos modifican el mismo objeto.
+         En este caso, se usa la política mergeByPropertyObjectTrump, lo que significa:
+         "Si hay un conflicto, los cambios del contexto actual (el viewContext) ganan sobre los cambios guardados en disco".*/
         container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         
+        /* Esta línea activa las notificaciones de cambios remotos para la tienda persistente.
+         
+         Muy útil si estás sincronizando datos con iCloud o si hay otros dispositivos escribiendo en el mismo almacenamiento.
+         
+         Permite que tu app reciba una notificación (NSPersistentStoreRemoteChange) cuando algo cambia en la base de datos fuera del contexto actual.*/
         container.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         
+        /* Esto permite que tu aplicación detecte y reaccione en tiempo real si otro dispositivo o proceso cambia los datos. Es muy útil, por ejemplo, cuando usas iCloud o un contexto en segundo plano.*/
         NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange, object: container.persistentStoreCoordinator, queue: .main, using: remoteStoreChanged)
         
         // Aquí se cargan los datos desde el disco o se crea la base de datos si no existe.
@@ -105,5 +116,15 @@ class DataController: ObservableObject {
         delete(request2)
         
         save()
+    }
+    
+    func missingTags(from issue: Issue) -> [Tag] {
+        let request = Tag.fetchRequest()
+        let allTags = (try? container.viewContext.fetch(request)) ?? []
+        
+        let allTagsSet = Set(allTags)
+        let difference = allTagsSet.symmetricDifference(issue.issueTags)
+        
+        return difference.sorted()
     }
 }
