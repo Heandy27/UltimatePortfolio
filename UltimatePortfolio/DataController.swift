@@ -5,6 +5,7 @@ class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
     @Published var selectedFilter: Filter? = Filter.all
     @Published var selectedIssue: Issue?
+    @Published var saveTask: Task<Void, Error>?
     
     
     /*Esta es una instancia estática que se usa para previsualización en SwiftUI.
@@ -82,6 +83,18 @@ class DataController: ObservableObject {
     func save() {
         if container.viewContext.hasChanges {
             try? container.viewContext.save()
+        }
+    }
+    
+    
+    func queueSave() {
+        saveTask?.cancel()
+        
+        saveTask = Task { @MainActor in
+            print("Queuing save")
+            try await Task.sleep(for: .seconds(3))
+            save()
+            print("Saved!")
         }
     }
     
